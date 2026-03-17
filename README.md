@@ -24,6 +24,7 @@ Este projeto prático consiste na implantação de um site de portfólio profiss
 * **Amazon S3:** Armazenamento de objetos e hospedagem web.
 * **AWS IAM (Bucket Policies):** Controle de acesso e segurança.
 * **HTML5 & TailwindCSS:** Estruturação e estilização do frontend.
+* **GitHub** Repositorio.
 
 ## 🚀 Passo a Passo da Implementação
 1. Criação de um bucket S3 com nomenclatura única global.
