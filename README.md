@@ -1,6 +1,6 @@
 # ☁️ Portfólio Cloud - Hospedagem de Site Estático com Amazon S3
 
-[![AWS](https://img.shields.io/badge/AWS-Amazon_S3-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)](http://s3-website-danelvillegas-2026.s3-website-us-east-1.amazonaws.com)
+[![AWS](https://img.shields.io/badge/AWS-Amazon_S3-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)](http://proyecto-s3-website-danelvillegas-2026.s3-website-us-east-1.amazonaws.com)
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/pt-BR/docs/Web/HTML)
 [![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
