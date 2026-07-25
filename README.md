@@ -9,7 +9,7 @@ Este projeto prático consiste na implantação de um site de portfólio profiss
 
 ## 🌐 Demo do Projeto
 
-[![Sitio en vivo](https://img.shields.io/badge/AWS-S3_Website-FF9900?style=for-the-badge&logo=amazon-s3&logoColor=white)](http://proyecto-s3-website-danelvillegas-2026.s3-website-us-east-1.amazonaws.com)
+[![Sitio en vivo](https://img.shields.io/badge/AWS-S3_Website-FF9900?style=for-the-badge&logo=amazon-s3&logoColor=white)](https://proyecto-s3-website-danelvillegas-2026.s3.us-east-1.amazonaws.com/index.html)
 
 > **Nota:** O link acima leva ao endpoint público do Amazon S3 onde o site está hospedado.
 
