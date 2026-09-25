@@ -4,110 +4,114 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daniel Villegas | Cloud Engineer</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+  /* Paleta y tokens alineados con AI Mentoring (src/frontend/css/theme.css) */
   :root{
-    --bg: #0A0A0C;
-    --surface: #131316;
-    --surface-2: #1A1A1F;
-    --border: rgba(255,255,255,0.08);
-    --border-strong: rgba(255,255,255,0.16);
-    --text-primary: #F5F5F7;
-    --text-secondary: #9B9BA3;
-    --text-muted: #5C5C64;
-    --orange: #FF7A1A;
-    --orange-dim: rgba(255,122,26,0.12);
-    --orange-2: #FFA359;
-    --radius: 10px;
-    --font-display: 'Space Grotesk', sans-serif;
-    --font-body: 'Inter', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
+    --bg: #0F1720;
+    --surface: #17212C;
+    --surface-2: #1F2B38;
+    --border: #2A3846;
+    --border-strong: #3A4B5D;
+    --text: #E7ECF1;
+    --text-muted: #93A2B1;
+    --accent: #F2B705;
+    --accent-hover: #FFC933;
+    --accent-dim: rgba(242,183,5,0.12);
+    --success: #35D399;
+    --radius: 0.625rem;
+    --shadow: 0 1px 2px rgba(0,0,0,0.25), 0 8px 24px rgba(0,0,0,0.18);
+    --font: system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, Helvetica, Arial, "Helvetica Neue", sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
-  body{background:var(--bg); color:var(--text-primary); font-family:var(--font-body); line-height:1.6;}
-  .wrap{max-width:1000px; margin:0 auto; padding:0 24px;}
+  body{background:var(--bg); color:var(--text); font-family:var(--font); line-height:1.6; -webkit-font-smoothing:antialiased;}
+  ::selection{background:rgba(242,183,5,0.3); color:var(--text);}
+  .wrap{max-width:1040px; margin:0 auto; padding:0 16px;}
   a{color:inherit; text-decoration:none;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:var(--radius);}
 
-  nav{display:flex; justify-content:space-between; align-items:center; padding:28px 0;}
-  .logo{font-family:var(--font-mono); font-size:14px; color:var(--text-secondary);}
-  .logo span{color:var(--orange);}
-  .lang-switch{display:flex; gap:4px; background:var(--surface); border:1px solid var(--border); border-radius:100px; padding:4px;}
-  .lang-switch button{font-family:var(--font-mono); font-size:12px; padding:6px 12px; border-radius:100px; background:transparent; border:none; color:var(--text-muted); cursor:pointer; transition:all .15s ease;}
-  .lang-switch button.active{background:var(--orange); color:#1A0800;}
-  .lang-switch button:hover:not(.active){color:var(--text-primary);}
+  nav{display:flex; justify-content:space-between; align-items:center; padding:18px 0; border-bottom:1px solid var(--border);}
+  .logo{font-weight:700; letter-spacing:0.01em;}
+  .logo span{color:var(--accent);}
 
-  .hero{display:grid; grid-template-columns:1.3fr 1fr; gap:48px; align-items:center; padding:56px 0 40px;}
-  .terminal{font-family:var(--font-mono); font-size:13px; color:var(--text-secondary); background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:6px 14px; display:inline-flex; align-items:center; gap:8px; margin-bottom:24px;}
-  .terminal .dots{display:flex; gap:5px;}
-  .terminal .dot{width:8px; height:8px; border-radius:50%;}
-  .dot.r{background:#FF5F57;} .dot.y{background:#FEBC2E;} .dot.g{background:#28C840;}
-  .hero h1{font-family:var(--font-display); font-weight:700; font-size:44px; line-height:1.1; margin-bottom:16px; letter-spacing:-0.02em;}
-  .hero h1 .accent{color:var(--orange);}
-  .hero .role{font-family:var(--font-mono); font-size:15px; color:var(--orange-2); margin-bottom:20px;}
-  .hero p.bio{color:var(--text-secondary); font-size:15px; max-width:48ch; margin-bottom:14px;}
-  .hero-links{display:flex; flex-wrap:wrap; gap:12px; margin-top:20px;}
-  .btn{display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:8px; font-size:14px; font-weight:500; border:1px solid var(--border-strong); transition:all .15s ease;}
-  .btn.primary{background:var(--orange); border-color:var(--orange); color:#1A0800;}
-  .btn.primary:hover{background:var(--orange-2);}
-  .btn.ghost:hover{border-color:var(--text-secondary);}
+  /* Selector de idioma: mismo patrón que .lang-switch de la mentoría */
+  .lang-switch{display:inline-flex; border:1px solid var(--border); border-radius:999px; overflow:hidden; background:var(--surface-2);}
+  .lang-switch button{padding:0.3rem 0.7rem; border:none; background:transparent; color:var(--text-muted); font:700 0.75rem/1.2 var(--font); letter-spacing:0.05em; cursor:pointer;}
+  .lang-switch button:hover{color:var(--text);}
+  .lang-switch button.active{background:var(--accent); color:var(--bg);}
 
-  .photo-frame{position:relative; justify-self:center; width:260px; height:440px;}
-  .photo-frame img{position:relative; width:100%; height:100%; object-fit:contain; object-position:center top;}
+  .hero{display:grid; grid-template-columns:1.35fr 1fr; gap:48px; align-items:center; padding:56px 0 40px;}
+  .status{display:inline-flex; align-items:center; gap:8px; padding:0.25rem 0.75rem; margin-bottom:22px; border:1px solid rgba(53,211,153,0.45); border-radius:999px; color:var(--success); font-size:0.8rem; font-weight:600;}
+  .status::before{content:""; width:8px; height:8px; border-radius:50%; background:var(--success); box-shadow:0 0 0 3px rgba(53,211,153,0.18);}
+  .hero h1{font-weight:800; font-size:2.75rem; line-height:1.1; margin-bottom:14px; letter-spacing:-0.02em;}
+  .hero h1 .accent{color:var(--accent);}
+  .hero .role{font-family:var(--font-mono); font-size:0.9rem; color:var(--text-muted); margin-bottom:20px;}
+  .hero p.bio{color:var(--text-muted); font-size:1rem; max-width:52ch; margin-bottom:14px;}
+  .hero-links{display:flex; flex-wrap:wrap; gap:12px; margin-top:22px;}
+
+  .btn{display:inline-flex; align-items:center; gap:8px; padding:0.7rem 1.2rem; border-radius:var(--radius); font-size:0.95rem; font-weight:600; border:1px solid var(--border); background:var(--surface-2); color:var(--text); transition:background .15s ease, border-color .15s ease;}
+  .btn:hover{background:#283748; border-color:var(--border-strong);}
+  .btn.primary{background:var(--accent); border-color:var(--accent); color:var(--bg);}
+  .btn.primary:hover{background:var(--accent-hover); border-color:var(--accent-hover);}
+
+  .photo-frame{justify-self:center; width:280px; aspect-ratio:616/880; border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; background:var(--surface); box-shadow:var(--shadow);}
+  .photo-frame img{display:block; width:100%; height:100%; object-fit:cover;}
 
   .stats-row{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; padding:32px 0 56px; border-bottom:1px solid var(--border);}
-  .stat-card{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px; text-align:center;}
-  .stat-card .num{font-family:var(--font-display); font-size:28px; font-weight:700; color:var(--orange);}
-  .stat-card .label{font-size:12px; color:var(--text-secondary); margin-top:4px;}
+  .stat-card{background:var(--surface-2); border:1px solid var(--border); border-radius:var(--radius); padding:1.25rem 1rem; text-align:center;}
+  .stat-card .num{font-size:1.9rem; font-weight:800; color:var(--accent); line-height:1.2;}
+  .stat-card .label{font-size:0.8rem; color:var(--text-muted); margin-top:4px;}
 
   .section{padding:56px 0;}
-  .section-eyebrow{font-family:var(--font-mono); font-size:12px; color:var(--orange); letter-spacing:.05em; margin-bottom:8px;}
-  .section h2{font-family:var(--font-display); font-size:26px; font-weight:600; margin-bottom:36px;}
+  .section-eyebrow{font-size:0.78rem; font-weight:600; color:var(--accent); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:8px;}
+  .section h2{font-size:1.75rem; font-weight:700; margin-bottom:32px;}
 
-  .skills-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px 40px;}
-  .skill-row{margin-bottom:4px;}
-  .skill-row .top{display:flex; justify-content:space-between; font-size:13.5px; margin-bottom:6px;}
-  .skill-row .top span:first-child{color:var(--text-primary); font-weight:500;}
-  .skill-track{height:6px; background:var(--surface-2); border-radius:100px; overflow:hidden;}
-  .skill-fill{height:100%; background:var(--orange); border-radius:100px;}
+  .skills-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px 40px;}
+  .skill-row{margin-bottom:14px;}
+  .skill-row .top{font-size:0.9rem; font-weight:600; margin-bottom:6px;}
+  .skill-track{height:6px; background:var(--surface-2); border-radius:999px; overflow:hidden;}
+  .skill-fill{height:100%; background:var(--accent); border-radius:999px;}
 
-  .certs{display:flex; flex-wrap:wrap; gap:14px; margin-top:36px;}
-  .cert-badge{display:flex; align-items:center; gap:10px; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 16px;}
-  .cert-badge img{width:26px; height:26px; object-fit:contain;}
-  .cert-badge span{font-size:13px; color:var(--text-secondary);}
+  .certs{display:flex; flex-wrap:wrap; gap:12px; margin-top:28px;}
+  .cert-badge{display:flex; align-items:center; gap:10px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:10px 16px;}
+  .cert-badge img{width:28px; height:28px; object-fit:contain;}
+  .cert-badge span{font-size:0.85rem; color:var(--text-muted); font-weight:500;}
 
   .projects-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
-  .project-card{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:22px; display:flex; flex-direction:column; gap:10px; transition:border-color .15s ease, transform .15s ease;}
-  .project-card:hover{border-color:var(--orange); transform:translateY(-2px);}
-  .project-card .top-row{display:flex; justify-content:space-between; align-items:flex-start;}
-  .project-num{font-family:var(--font-display); font-size:22px; font-weight:700; color:rgba(255,122,26,0.4);}
-  .project-badge{font-family:var(--font-mono); font-size:11px; padding:3px 9px; border-radius:100px; background:var(--orange-dim); color:var(--orange-2); height:fit-content;}
-  .project-card h3{font-family:var(--font-display); font-size:17px; font-weight:600;}
-  .project-card p{font-size:13.5px; color:var(--text-secondary);}
+  .project-card{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:1.5rem; display:flex; flex-direction:column; gap:10px; transition:border-color .15s ease, transform .15s ease;}
+  .project-card:hover{border-color:var(--border-strong); transform:translateY(-2px);}
+  /* Destacado: mismo recurso que los banners del dashboard de la mentoría */
+  .project-card.featured{grid-column:1 / -1; border-left:4px solid var(--accent);}
+  .project-card .top-row{display:flex; justify-content:space-between; align-items:center; gap:12px;}
+  .project-num{font-size:1.3rem; font-weight:800; color:rgba(242,183,5,0.45);}
+  .badges{display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end;}
+  .project-badge{display:inline-block; padding:0.15rem 0.6rem; border:1px solid var(--border); border-radius:999px; background:var(--surface-2); color:var(--text-muted); font-size:0.75rem; font-weight:600; white-space:nowrap;}
+  .project-badge.live{border-color:rgba(53,211,153,0.45); color:var(--success);}
+  .project-badge.team{border-color:rgba(242,183,5,0.45); color:var(--accent);}
+  .project-card h3{font-size:1.1rem; font-weight:700;}
+  .project-card p{font-size:0.9rem; color:var(--text-muted);}
   .project-tags{display:flex; flex-wrap:wrap; gap:6px; margin-top:2px;}
-  .project-tags span{font-family:var(--font-mono); font-size:11px; color:var(--text-muted);}
-  .project-link{margin-top:auto; font-size:13px; font-weight:500; color:var(--text-primary); display:inline-flex; align-items:center; gap:6px; padding-top:8px; border-top:1px solid var(--border);}
-  .project-link:hover{color:var(--orange);}
+  .project-tags span{font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); background:var(--surface-2); border-radius:6px; padding:2px 7px;}
+  .project-link{margin-top:auto; font-size:0.85rem; font-weight:600; color:var(--accent); display:inline-flex; align-items:center; gap:6px; padding-top:12px; border-top:1px solid var(--border);}
+  .project-link:hover{color:var(--accent-hover);}
   .project-link svg{width:13px; height:13px;}
 
-  .cta-section{text-align:center; padding:64px 0;}
-  .cta-section h2{font-family:var(--font-display); font-size:28px; font-weight:600; margin-bottom:12px;}
-  .cta-section p{color:var(--text-secondary); font-size:15px; margin-bottom:28px;}
-  .cta-links{display:flex; justify-content:center; gap:12px;}
+  .cta-section{margin:24px 0 56px; padding:48px 24px; text-align:center; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow);}
+  .cta-section h2{font-size:1.75rem; font-weight:700; margin-bottom:10px;}
+  .cta-section p{color:var(--text-muted); margin-bottom:26px;}
+  .cta-links{display:flex; justify-content:center; flex-wrap:wrap; gap:12px;}
 
-  footer{padding:40px 0; text-align:center; color:var(--text-muted); font-size:13px; border-top:1px solid var(--border);}
+  footer{padding:32px 0; text-align:center; color:var(--text-muted); font-size:0.85rem; border-top:1px solid var(--border);}
 
-  @media (max-width:720px){
-    .hero{grid-template-columns:1fr; text-align:center;}
+  @media (max-width:767px){
+    .hero{grid-template-columns:1fr; text-align:center; padding-top:36px;}
     .hero-links{justify-content:center;}
-    .hero p.bio{max-width:none; margin-left:auto; margin-right:auto;}
-    .photo-frame{order:-1; margin:0 auto;}
+    .hero p.bio{max-width:none;}
+    .photo-frame{order:-1; width:200px;}
     .stats-row{grid-template-columns:1fr 1fr;}
-    .skills-grid{grid-template-columns:1fr;}
-    .projects-grid{grid-template-columns:1fr;}
-    .hero h1{font-size:34px;}
+    .skills-grid, .projects-grid{grid-template-columns:1fr;}
+    .hero h1{font-size:2.1rem;}
   }
 </style>
 </head>
@@ -125,10 +129,7 @@
 
   <section class="hero">
     <div>
-      <div class="terminal">
-        <div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
-        <span data-i18n="hero.terminal">status: disponível para novos projetos</span>
-      </div>
+      <div class="status" data-i18n="hero.terminal">disponível para novos projetos</div>
       <h1 data-i18n="hero.greeting">Olá, eu sou <span class="accent">Daniel Villegas</span></h1>
       <div class="role" data-i18n="hero.role">$ cloud engineer --focus=aws,terraform,ia-generativa</div>
       <p class="bio" data-i18n="hero.bio">Profissional certificado AWS (4x), com foco em Cloud Computing, Infraestrutura como Código (Terraform) e automação com Inteligência Artificial Generativa. Aplico esses conhecimentos em projetos práticos de automação e arquiteturas modernas baseadas em eventos, além de redes seguras provisionadas como código, sempre com boas práticas de segurança e deploy automatizado.</p>
@@ -141,13 +142,13 @@
       </div>
     </div>
     <div class="photo-frame">
-      <img src="img/perfil_portafolio.png" alt="Daniel Villegas">
+      <img src="img/perfil_portafolio.webp" alt="Daniel Villegas" width="616" height="880">
     </div>
   </section>
 
   <div class="stats-row">
     <div class="stat-card"><div class="num">4x</div><div class="label" data-i18n="stat.certs">Certificações AWS</div></div>
-    <div class="stat-card"><div class="num">4</div><div class="label" data-i18n="stat.projects">Projetos documentados</div></div>
+    <div class="stat-card"><div class="num">5</div><div class="label" data-i18n="stat.projects">Projetos documentados</div></div>
     <div class="stat-card"><div class="num">15+</div><div class="label" data-i18n="stat.leadership">Anos de liderança</div></div>
     <div class="stat-card"><div class="num">3</div><div class="label" data-i18n="stat.languages">Idiomas</div></div>
   </div>
@@ -180,8 +181,19 @@
     <h2 data-i18n="projects.heading">Projetos em destaque</h2>
     <div class="projects-grid">
 
+      <div class="project-card featured">
+        <div class="top-row"><span class="project-num">01</span><span class="badges"><span class="project-badge live" data-i18n="badge.live">em produção</span><span class="project-badge" data-i18n="badge.solo">individual</span></span></div>
+        <h3 data-i18n="p0.title">AI Mentoring — plataforma de mentoria AWS com IA generativa</h3>
+        <p data-i18n="p0.desc">Plataforma serverless usada por turmas reais de mentoria para a certificação AWS Cloud Practitioner. Fotos de provas enviadas ao S3 passam por SQS + DLQ até uma Lambda que usa Claude no Amazon Bedrock para OCR e estruturação em JSON, alimentando um banco de questões no DynamoDB. Os alunos fazem diagnóstico, prática por tema e exame final de 65 questões via API Gateway com autenticação Cognito (JWT) e frontend no Amplify. Infraestrutura 100% Terraform com CI/CD no GitHub Actions via OIDC.</p>
+        <div class="project-tags"><span>#Bedrock</span><span>#Terraform</span><span>#Lambda</span><span>#Cognito</span><span>#DynamoDB</span><span>#GitHubActions</span></div>
+        <a class="project-link" href="https://github.com/DevDan7/AI_Mentoring" target="_blank" rel="noopener">
+          <span data-i18n="link.repo">Ver repositório</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </a>
+      </div>
+
       <div class="project-card">
-        <div class="top-row"><span class="project-num">01</span><span class="project-badge" data-i18n="badge.solo">individual</span></div>
+        <div class="top-row"><span class="project-num">02</span><span class="project-badge" data-i18n="badge.solo">individual</span></div>
         <h3 data-i18n="p1.title">Hospedagem de site estático serverless</h3>
         <p data-i18n="p1.desc">Este site (o que você está vendo agora) roda sobre Amazon S3 com Static Website Hosting, provisionado via Terraform. Base de IAM e controle de acesso que depois reutilizei em projetos com IA generativa.</p>
         <div class="project-tags"><span>#AWS</span><span>#Terraform</span><span>#S3</span></div>
@@ -192,7 +204,7 @@
       </div>
 
       <div class="project-card">
-        <div class="top-row"><span class="project-num">02</span><span class="project-badge" data-i18n="badge.solo">individual</span></div>
+        <div class="top-row"><span class="project-num">03</span><span class="project-badge" data-i18n="badge.solo">individual</span></div>
         <h3 data-i18n="p2.title">Reconhecimento facial serverless com IA</h3>
         <p data-i18n="p2.desc">Arquitetura orientada a eventos: upload de imagem no S3 aciona uma Lambda que usa Amazon Rekognition, salva resultados no DynamoDB e envia alertas via SNS.</p>
         <div class="project-tags"><span>#Rekognition</span><span>#Lambda</span><span>#DynamoDB</span></div>
@@ -203,7 +215,7 @@
       </div>
 
       <div class="project-card">
-        <div class="top-row"><span class="project-num">03</span><span class="project-badge" data-i18n="badge.solo">individual</span></div>
+        <div class="top-row"><span class="project-num">04</span><span class="project-badge" data-i18n="badge.solo">individual</span></div>
         <h3 data-i18n="p3.title">Pipeline de audiolivros com IA (dual-engine)</h3>
         <p data-i18n="p3.desc">Pipeline serverless que converte PDFs em audiolivros, alternando entre Amazon Polly e ElevenLabs. Infraestrutura 100% em Terraform, com fila SQS + DLQ e FinOps.</p>
         <div class="project-tags"><span>#Terraform</span><span>#SQS</span><span>#Polly</span></div>
@@ -214,7 +226,7 @@
       </div>
 
       <div class="project-card">
-        <div class="top-row"><span class="project-num">04</span><span class="project-badge" data-i18n="badge.team">em equipe</span></div>
+        <div class="top-row"><span class="project-num">05</span><span class="project-badge team" data-i18n="badge.team">em equipe</span></div>
         <h3 data-i18n="p4.title">DocuSmart — agente de IA para triagem de documentos</h3>
         <p data-i18n="p4.desc">Projeto em equipe com agente Strands em Lambda: extrai texto com Textract, classifica e resume com Bedrock. Meu papel: arquitetura e infraestrutura AWS completa.</p>
         <div class="project-tags"><span>#Bedrock</span><span>#Strands</span><span>#Textract</span></div>
@@ -242,7 +254,7 @@
 <script>
 const i18n = {
   pt: {
-    "hero.terminal": "status: disponível para novos projetos",
+    "hero.terminal": "disponível para novos projetos",
     "hero.greeting": 'Olá, eu sou <span class="accent">Daniel Villegas</span>',
     "hero.role": "$ cloud engineer --focus=aws,terraform,ia-generativa",
     "hero.bio": "Profissional certificado AWS (4x), com foco em Cloud Computing, Infraestrutura como Código (Terraform) e automação com Inteligência Artificial Generativa. Aplico esses conhecimentos em projetos práticos de automação e arquiteturas modernas baseadas em eventos, além de redes seguras provisionadas como código, sempre com boas práticas de segurança e deploy automatizado.",
@@ -260,6 +272,9 @@ const i18n = {
     "projects.heading": "Projetos em destaque",
     "badge.solo": "individual",
     "badge.team": "em equipe",
+    "badge.live": "em produção",
+    "p0.title": "AI Mentoring — plataforma de mentoria AWS com IA generativa",
+    "p0.desc": "Plataforma serverless usada por turmas reais de mentoria para a certificação AWS Cloud Practitioner. Fotos de provas enviadas ao S3 passam por SQS + DLQ até uma Lambda que usa Claude no Amazon Bedrock para OCR e estruturação em JSON, alimentando um banco de questões no DynamoDB. Os alunos fazem diagnóstico, prática por tema e exame final de 65 questões via API Gateway com autenticação Cognito (JWT) e frontend no Amplify. Infraestrutura 100% Terraform com CI/CD no GitHub Actions via OIDC.",
     "p1.title": "Hospedagem de site estático serverless",
     "p1.desc": "Este site (o que você está vendo agora) roda sobre Amazon S3 com Static Website Hosting, provisionado via Terraform. Base de IAM e controle de acesso que depois reutilizei em projetos com IA generativa.",
     "p2.title": "Reconhecimento facial serverless com IA",
@@ -274,7 +289,7 @@ const i18n = {
     "footer.text": "Projetado e hospedado na AWS por Daniel Villegas © 2026"
   },
   es: {
-    "hero.terminal": "status: disponible para nuevos proyectos",
+    "hero.terminal": "disponible para nuevos proyectos",
     "hero.greeting": 'Hola, soy <span class="accent">Daniel Villegas</span>',
     "hero.role": "$ cloud engineer --focus=aws,terraform,ia-generativa",
     "hero.bio": "Profesional certificado AWS (4x), con foco en Cloud Computing, Infraestructura como Código (Terraform) y automatización con Inteligencia Artificial Generativa. Aplico estos conocimientos en proyectos prácticos de automatización y arquitecturas modernas orientadas a eventos, además de redes seguras provisionadas como código, siempre con buenas prácticas de seguridad y despliegue automatizado.",
@@ -292,6 +307,9 @@ const i18n = {
     "projects.heading": "Proyectos destacados",
     "badge.solo": "individual",
     "badge.team": "en equipo",
+    "badge.live": "en producción",
+    "p0.title": "AI Mentoring — plataforma de mentoría AWS con IA generativa",
+    "p0.desc": "Plataforma serverless usada por cohortes reales de mentoría para la certificación AWS Cloud Practitioner. Las fotos de exámenes subidas a S3 pasan por SQS + DLQ hasta una Lambda que usa Claude en Amazon Bedrock para OCR y estructuración en JSON, alimentando un banco de preguntas en DynamoDB. Los alumnos hacen un diagnóstico, práctica por tema y un examen final de 65 preguntas vía API Gateway con autenticación Cognito (JWT) y frontend en Amplify. Infraestructura 100% Terraform con CI/CD en GitHub Actions vía OIDC.",
     "p1.title": "Hospedaje de sitio web estático serverless",
     "p1.desc": "Este sitio (el que estás viendo ahora) corre sobre Amazon S3 con Static Website Hosting, provisionado vía Terraform. Base de IAM y control de acceso que luego reutilicé en proyectos con IA generativa.",
     "p2.title": "Reconocimiento facial serverless con IA",
@@ -306,7 +324,7 @@ const i18n = {
     "footer.text": "Diseñado y desplegado en AWS por Daniel Villegas © 2026"
   },
   en: {
-    "hero.terminal": "status: available for new projects",
+    "hero.terminal": "available for new projects",
     "hero.greeting": 'Hi, I\'m <span class="accent">Daniel Villegas</span>',
     "hero.role": "$ cloud engineer --focus=aws,terraform,generative-ai",
     "hero.bio": "AWS Certified Professional (4x), focused on Cloud Computing, Infrastructure as Code (Terraform), and automation with Generative AI. I apply this knowledge in practical projects involving automation and modern event-driven architectures, as well as secure networks provisioned as code, always following security best practices and automated deployment.",
@@ -324,6 +342,9 @@ const i18n = {
     "projects.heading": "Featured projects",
     "badge.solo": "solo",
     "badge.team": "team",
+    "badge.live": "in production",
+    "p0.title": "AI Mentoring — AWS mentoring platform powered by generative AI",
+    "p0.desc": "Serverless platform used by real mentoring cohorts preparing for the AWS Cloud Practitioner certification. Exam photos uploaded to S3 flow through SQS + DLQ into a Lambda that uses Claude on Amazon Bedrock for OCR and JSON structuring, feeding a DynamoDB question bank. Students take a diagnostic, topic practice and a 65-question final exam through API Gateway with Cognito (JWT) auth and an Amplify frontend. Infrastructure 100% in Terraform with CI/CD on GitHub Actions via OIDC.",
     "p1.title": "Serverless static website hosting",
     "p1.desc": "This site (the one you're looking at) runs on Amazon S3 with Static Website Hosting, provisioned via Terraform. The IAM and access-control foundation I later reused in generative AI projects.",
     "p2.title": "Serverless facial recognition with AI",
