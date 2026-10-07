@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daniel Villegas | Cloud Engineer</title>
+<meta name="description" content="Daniel Villegas — Cloud Engineer certificado AWS (4x). Projetos serverless com Terraform e IA generativa (Bedrock), mentor na Escola da Nuvem e AWS User Group Florianópolis.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Daniel Villegas | Cloud Engineer">
+<meta property="og:description" content="AWS 4x certificado · Terraform · IA generativa serverless · Comunidade AWS">
+<meta property="og:image" content="img/perfil_portafolio.webp">
+<meta name="theme-color" content="#0F1720">
 <style>
   /* Paleta y tokens alineados con AI Mentoring (src/frontend/css/theme.css) */
   :root{
@@ -25,13 +31,27 @@
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
-  body{background:var(--bg); color:var(--text); font-family:var(--font); line-height:1.6; -webkit-font-smoothing:antialiased;}
+  body{background:var(--bg); color:var(--text); position:relative; min-height:100vh;}
+  /* Fondo: grilla de puntos + halos laterales para que los costados no queden planos en desktop */
+  body::before{content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background:
+      radial-gradient(600px 480px at 0% 18%, rgba(242,183,5,0.08), transparent 70%),
+      radial-gradient(560px 520px at 100% 62%, rgba(53,211,153,0.06), transparent 70%),
+      radial-gradient(rgba(147,162,177,0.13) 1px, transparent 1px) 0 0/26px 26px;
+    -webkit-mask-image:linear-gradient(90deg, #000 0%, rgba(0,0,0,.35) 30%, rgba(0,0,0,.35) 70%, #000 100%);
+            mask-image:linear-gradient(90deg, #000 0%, rgba(0,0,0,.35) 30%, rgba(0,0,0,.35) 70%, #000 100%);}
+  body{ font-family:var(--font); line-height:1.6; -webkit-font-smoothing:antialiased;}
   ::selection{background:rgba(242,183,5,0.3); color:var(--text);}
-  .wrap{max-width:1040px; margin:0 auto; padding:0 16px;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 16px;}
   a{color:inherit; text-decoration:none;}
   a:focus-visible, button:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:var(--radius);}
 
-  nav{display:flex; justify-content:space-between; align-items:center; padding:18px 0; border-bottom:1px solid var(--border);}
+  header.topbar{position:sticky; top:0; z-index:10; background:rgba(15,23,32,0.82); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); border-bottom:1px solid var(--border);}
+  nav{display:flex; justify-content:space-between; align-items:center; gap:16px; padding:14px 0;}
+  .nav-links{display:flex; gap:22px; margin-left:auto; margin-right:18px;}
+  .nav-links a{font-size:0.88rem; font-weight:600; color:var(--text-muted);}
+  .nav-links a:hover{color:var(--accent);}
+  section[id]{scroll-margin-top:72px;}
   .logo{font-weight:700; letter-spacing:0.01em;}
   .logo span{color:var(--accent);}
 
@@ -97,6 +117,25 @@
   .project-link:hover{color:var(--accent-hover);}
   .project-link svg{width:13px; height:13px;}
 
+  /* Flujo de arquitectura: S3 → SQS → Lambda ... */
+  .arch-flow{display:flex; flex-wrap:wrap; align-items:center; gap:6px; padding:10px 12px; background:var(--bg); border:1px dashed var(--border-strong); border-radius:8px; font-family:var(--font-mono); font-size:0.74rem;}
+  .arch-flow b{font-weight:600; color:var(--text); background:var(--surface-2); border:1px solid var(--border); border-radius:6px; padding:2px 8px;}
+  .arch-flow b.ai{color:var(--accent); border-color:rgba(242,183,5,0.4);}
+  .arch-flow i{font-style:normal; color:var(--accent);}
+  .arch-label{font-family:var(--font-mono); font-size:0.68rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em;}
+
+  .community-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .community-card{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column;}
+  /* Foto opcional: si img/comunidad/<archivo>.webp no existe, queda el placeholder con ícono */
+  .event-photo{position:relative; aspect-ratio:16/9; background:linear-gradient(135deg, var(--surface-2), var(--bg)); display:grid; place-items:center; border-bottom:1px solid var(--border);}
+  .event-photo svg{width:40px; height:40px; color:var(--border-strong);}
+  .event-photo img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+  .community-body{padding:1.25rem 1.4rem 1.4rem; display:flex; flex-direction:column; gap:8px;}
+  .community-role{font-size:0.75rem; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:0.06em;}
+  .community-card h3{font-size:1.05rem; font-weight:700;}
+  .community-card p{font-size:0.88rem; color:var(--text-muted);}
+  .community-meta{font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); margin-top:auto; padding-top:10px; border-top:1px solid var(--border);}
+
   .cta-section{margin:24px 0 56px; padding:48px 24px; text-align:center; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow);}
   .cta-section h2{font-size:1.75rem; font-weight:700; margin-bottom:10px;}
   .cta-section p{color:var(--text-muted); margin-bottom:26px;}
@@ -104,28 +143,42 @@
 
   footer{padding:32px 0; text-align:center; color:var(--text-muted); font-size:0.85rem; border-top:1px solid var(--border);}
 
+  @media (min-width:768px) and (max-width:1023px){
+    .community-grid{grid-template-columns:1fr 1fr;}
+  }
   @media (max-width:767px){
     .hero{grid-template-columns:1fr; text-align:center; padding-top:36px;}
     .hero-links{justify-content:center;}
     .hero p.bio{max-width:none;}
     .photo-frame{order:-1; width:200px;}
     .stats-row{grid-template-columns:1fr 1fr;}
-    .skills-grid, .projects-grid{grid-template-columns:1fr;}
+    .skills-grid, .projects-grid, .community-grid{grid-template-columns:1fr;}
+    .nav-links{display:none;}
     .hero h1{font-size:2.1rem;}
   }
 </style>
 </head>
 <body>
 
+<header class="topbar">
 <div class="wrap">
   <nav>
-    <div class="logo">daniel<span>@</span>villegas</div>
+    <a class="logo" href="#">daniel<span>@</span>villegas</a>
+    <div class="nav-links">
+      <a href="#projects" data-i18n="nav.projects">Projetos</a>
+      <a href="#community" data-i18n="nav.community">Comunidade</a>
+      <a href="#contact" data-i18n="nav.contact">Contato</a>
+    </div>
     <div class="lang-switch">
       <button data-lang="pt" class="active">PT</button>
       <button data-lang="es">ES</button>
       <button data-lang="en">EN</button>
     </div>
   </nav>
+</div>
+</header>
+
+<div class="wrap">
 
   <section class="hero">
     <div>
@@ -185,6 +238,7 @@
         <div class="top-row"><span class="project-num">01</span><span class="badges"><span class="project-badge live" data-i18n="badge.live">em produção</span><span class="project-badge" data-i18n="badge.solo">individual</span></span></div>
         <h3 data-i18n="p0.title">AI Mentoring — plataforma de mentoria AWS com IA generativa</h3>
         <p data-i18n="p0.desc">Plataforma serverless usada por turmas reais de mentoria para a certificação AWS Cloud Practitioner. Fotos de provas enviadas ao S3 passam por SQS + DLQ até uma Lambda que usa Claude no Amazon Bedrock para OCR e estruturação em JSON, alimentando um banco de questões no DynamoDB. Os alunos fazem diagnóstico, prática por tema e exame final de 65 questões via API Gateway com autenticação Cognito (JWT) e frontend no Amplify. Infraestrutura 100% Terraform com CI/CD no GitHub Actions via OIDC.</p>
+        <div class="arch-flow" aria-label="Arquitetura"><span class="arch-label">flow</span><b>S3</b><i>→</i><b>SQS + DLQ</b><i>→</i><b>Lambda</b><i>→</i><b class="ai">Bedrock (Claude)</b><i>→</i><b>DynamoDB</b><i>→</i><b>API Gateway + Cognito</b><i>→</i><b>Amplify</b></div>
         <div class="project-tags"><span>#Bedrock</span><span>#Terraform</span><span>#Lambda</span><span>#Cognito</span><span>#DynamoDB</span><span>#GitHubActions</span></div>
         <a class="project-link" href="https://github.com/DevDan7/AI_Mentoring" target="_blank" rel="noopener">
           <span data-i18n="link.repo">Ver repositório</span>
@@ -196,6 +250,7 @@
         <div class="top-row"><span class="project-num">02</span><span class="project-badge" data-i18n="badge.solo">individual</span></div>
         <h3 data-i18n="p1.title">Hospedagem de site estático serverless</h3>
         <p data-i18n="p1.desc">Este site (o que você está vendo agora) roda sobre Amazon S3 com Static Website Hosting, provisionado via Terraform. Base de IAM e controle de acesso que depois reutilizei em projetos com IA generativa.</p>
+        <div class="arch-flow" aria-label="Arquitetura"><span class="arch-label">flow</span><b>Terraform</b><i>→</i><b>S3 Website</b><i>+</i><b>Bucket Policy</b><i>→</i><b>deploy.sh</b></div>
         <div class="project-tags"><span>#AWS</span><span>#Terraform</span><span>#S3</span></div>
         <a class="project-link" href="https://github.com/DevDan7/s3-website-danielvillegas-2026" target="_blank" rel="noopener">
           <span data-i18n="link.repo">Ver repositório</span>
@@ -207,6 +262,7 @@
         <div class="top-row"><span class="project-num">03</span><span class="project-badge" data-i18n="badge.solo">individual</span></div>
         <h3 data-i18n="p2.title">Reconhecimento facial serverless com IA</h3>
         <p data-i18n="p2.desc">Arquitetura orientada a eventos: upload de imagem no S3 aciona uma Lambda que usa Amazon Rekognition, salva resultados no DynamoDB e envia alertas via SNS.</p>
+        <div class="arch-flow" aria-label="Arquitetura"><span class="arch-label">flow</span><b>S3</b><i>→</i><b>Lambda</b><i>→</i><b class="ai">Rekognition</b><i>→</i><b>DynamoDB</b><i>→</i><b>SNS</b></div>
         <div class="project-tags"><span>#Rekognition</span><span>#Lambda</span><span>#DynamoDB</span></div>
         <a class="project-link" href="https://github.com/DevDan7/projeto-rekognition-ia" target="_blank" rel="noopener">
           <span data-i18n="link.repo">Ver repositório</span>
@@ -218,6 +274,7 @@
         <div class="top-row"><span class="project-num">04</span><span class="project-badge" data-i18n="badge.solo">individual</span></div>
         <h3 data-i18n="p3.title">Pipeline de audiolivros com IA (dual-engine)</h3>
         <p data-i18n="p3.desc">Pipeline serverless que converte PDFs em audiolivros, alternando entre Amazon Polly e ElevenLabs. Infraestrutura 100% em Terraform, com fila SQS + DLQ e FinOps.</p>
+        <div class="arch-flow" aria-label="Arquitetura"><span class="arch-label">flow</span><b>S3 (PDF)</b><i>→</i><b>Lambda</b><i>→</i><b>SQS + DLQ</b><i>→</i><b>Lambda</b><i>→</i><b class="ai">Polly | ElevenLabs</b><i>→</i><b>S3 (MP3)</b></div>
         <div class="project-tags"><span>#Terraform</span><span>#SQS</span><span>#Polly</span></div>
         <a class="project-link" href="https://github.com/DevDan7/aws-serverless-audiobook-pipeline" target="_blank" rel="noopener">
           <span data-i18n="link.repo">Ver repositório</span>
@@ -229,6 +286,7 @@
         <div class="top-row"><span class="project-num">05</span><span class="project-badge team" data-i18n="badge.team">em equipe</span></div>
         <h3 data-i18n="p4.title">DocuSmart — agente de IA para triagem de documentos</h3>
         <p data-i18n="p4.desc">Projeto em equipe com agente Strands em Lambda: extrai texto com Textract, classifica e resume com Bedrock. Meu papel: arquitetura e infraestrutura AWS completa.</p>
+        <div class="arch-flow" aria-label="Arquitetura"><span class="arch-label">flow</span><b>API Gateway</b><i>→</i><b>Lambda (Strands)</b><i>→</i><b>Textract</b><i>→</i><b class="ai">Bedrock</b><i>→</i><b>DynamoDB</b></div>
         <div class="project-tags"><span>#Bedrock</span><span>#Strands</span><span>#Textract</span></div>
         <a class="project-link" href="https://github.com/DevDan7/docusmart-ai-aws-serverless" target="_blank" rel="noopener">
           <span data-i18n="link.repo">Ver repositório</span>
@@ -239,11 +297,45 @@
     </div>
   </section>
 
-  <section class="cta-section">
+  <section class="section" id="community">
+    <div class="section-eyebrow" data-i18n="community.eyebrow">comunidade</div>
+    <h2 data-i18n="community.heading">Comunidade AWS</h2>
+    <div class="community-grid">
+      <div class="community-card">
+        <div class="event-photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8a2 2 0 0 1 2-2h2l2-2h6l2 2h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="4"/></svg><img src="img/comunidad/aws-ug-floripa.webp" alt="AWS User Group Florianópolis" loading="lazy" onerror="this.remove()"></div>
+        <div class="community-body">
+          <div class="community-role" data-i18n="c1.role"></div>
+          <h3 data-i18n="c1.title"></h3>
+          <p data-i18n="c1.desc"></p>
+          <div class="community-meta">Florianópolis, SC</div>
+        </div>
+      </div>
+      <div class="community-card">
+        <div class="event-photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8a2 2 0 0 1 2-2h2l2-2h6l2 2h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="4"/></svg><img src="img/comunidad/escola-da-nuvem.webp" alt="Escola da Nuvem" loading="lazy" onerror="this.remove()"></div>
+        <div class="community-body">
+          <div class="community-role" data-i18n="c2.role"></div>
+          <h3 data-i18n="c2.title"></h3>
+          <p data-i18n="c2.desc"></p>
+          <div class="community-meta">AI Mentoring · Cloud Practitioner</div>
+        </div>
+      </div>
+      <div class="community-card">
+        <div class="event-photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8a2 2 0 0 1 2-2h2l2-2h6l2 2h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="4"/></svg><img src="img/comunidad/community-day-sul-2026.webp" alt="AWS Community Day Sul 2026" loading="lazy" onerror="this.remove()"></div>
+        <div class="community-body">
+          <div class="community-role" data-i18n="c3.role"></div>
+          <h3 data-i18n="c3.title"></h3>
+          <p data-i18n="c3.desc"></p>
+          <div class="community-meta">Curitiba, PR · 19/09/2026</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" id="contact">
     <h2 data-i18n="cta.heading">Vamos trabalhar juntos?</h2>
     <p data-i18n="cta.body">Estou aberto a oportunidades como Cloud/DevOps Engineer Jr. Fale comigo.</p>
     <div class="cta-links">
-      <a class="btn primary" href="mailto:danielsvillegas@gmail.com" data-i18n="cta.email">Enviar e-mail</a>
+      <a class="btn primary" href="mailto:danielsvillegas17@gmail.com" data-i18n="cta.email">Enviar e-mail</a>
       <a class="btn ghost" href="https://www.linkedin.com/in/vdaniel07/" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </section>
@@ -283,6 +375,20 @@ const i18n = {
     "p3.desc": "Pipeline serverless que converte PDFs em audiolivros, alternando entre Amazon Polly e ElevenLabs. Infraestrutura 100% em Terraform, com fila SQS + DLQ e FinOps.",
     "p4.title": "DocuSmart — agente de IA para triagem de documentos",
     "p4.desc": "Projeto em equipe com agente Strands em Lambda: extrai texto com Textract, classifica e resume com Bedrock. Meu papel: arquitetura e infraestrutura AWS completa.",
+    "nav.projects": "Projetos",
+    "nav.community": "Comunidade",
+    "nav.contact": "Contato",
+    "community.eyebrow": "comunidade",
+    "community.heading": "Comunidade AWS",
+    "c1.role": "Organização · voluntariado",
+    "c1.title": "AWS User Group Florianópolis",
+    "c1.desc": "Ajudo a organizar os encontros do grupo de usuários AWS de Florianópolis (2 encontros até agora), conectando quem está começando na nuvem com profissionais da área.",
+    "c2.role": "Mentor voluntário",
+    "c2.title": "Escola da Nuvem",
+    "c2.desc": "Mentoria de turmas que se preparam para a certificação AWS Cloud Practitioner. A plataforma AI Mentoring nasceu para apoiar essas sessões e é usada pelos alunos.",
+    "c3.role": "Voluntário",
+    "c3.title": "AWS Community Day Sul 2026",
+    "c3.desc": "Apoio na logística do evento em Curitiba, condução de um dos momentos do palco e networking com profissionais e speakers da comunidade AWS.",
     "cta.heading": "Vamos trabalhar juntos?",
     "cta.body": "Estou aberto a oportunidades como Cloud/DevOps Engineer Jr. Fale comigo.",
     "cta.email": "Enviar e-mail",
@@ -318,6 +424,20 @@ const i18n = {
     "p3.desc": "Pipeline serverless que convierte PDFs en audiolibros, alternando entre Amazon Polly y ElevenLabs. Infraestructura 100% en Terraform, con cola SQS + DLQ y FinOps.",
     "p4.title": "DocuSmart — agente de IA para triage de documentos",
     "p4.desc": "Proyecto en equipo con agente Strands en Lambda: extrae texto con Textract, clasifica y resume con Bedrock. Mi rol: arquitectura e infraestructura AWS completa.",
+    "nav.projects": "Proyectos",
+    "nav.community": "Comunidad",
+    "nav.contact": "Contacto",
+    "community.eyebrow": "comunidad",
+    "community.heading": "Comunidad AWS",
+    "c1.role": "Organización · voluntariado",
+    "c1.title": "AWS User Group Florianópolis",
+    "c1.desc": "Ayudo a organizar los encuentros del grupo de usuarios AWS de Florianópolis (2 encuentros hasta ahora), conectando a quienes empiezan en la nube con profesionales del área.",
+    "c2.role": "Mentor voluntario",
+    "c2.title": "Escola da Nuvem",
+    "c2.desc": "Mentoría de cohortes que se preparan para la certificación AWS Cloud Practitioner. La plataforma AI Mentoring nació para apoyar esas sesiones y la usan los alumnos.",
+    "c3.role": "Voluntario",
+    "c3.title": "AWS Community Day Sul 2026",
+    "c3.desc": "Apoyo en la logística del evento en Curitiba, conducción de uno de los momentos del escenario y networking con profesionales y speakers de la comunidad AWS.",
     "cta.heading": "¿Trabajamos juntos?",
     "cta.body": "Estoy abierto a oportunidades como Cloud/DevOps Engineer Jr. Escríbeme.",
     "cta.email": "Enviar correo",
@@ -353,6 +473,20 @@ const i18n = {
     "p3.desc": "Serverless pipeline that converts PDFs into audiobooks, toggling between Amazon Polly and ElevenLabs. Infrastructure fully in Terraform, with an SQS queue + DLQ and a FinOps mindset.",
     "p4.title": "DocuSmart — AI agent for document triage",
     "p4.desc": "Team project with a Strands agent on Lambda: extracts text with Textract, classifies and summarizes with Bedrock. My role: solution architecture and full AWS infrastructure.",
+    "nav.projects": "Projects",
+    "nav.community": "Community",
+    "nav.contact": "Contact",
+    "community.eyebrow": "community",
+    "community.heading": "AWS Community",
+    "c1.role": "Organizing · volunteering",
+    "c1.title": "AWS User Group Florianópolis",
+    "c1.desc": "I help organize the Florianópolis AWS User Group meetups (2 so far), connecting people starting out in cloud with industry professionals.",
+    "c2.role": "Volunteer mentor",
+    "c2.title": "Escola da Nuvem",
+    "c2.desc": "Mentoring cohorts preparing for the AWS Cloud Practitioner certification. The AI Mentoring platform was built to support these sessions and is used by the students.",
+    "c3.role": "Volunteer",
+    "c3.title": "AWS Community Day Sul 2026",
+    "c3.desc": "Event logistics support in Curitiba, hosting one of the on-stage moments, and networking with AWS community professionals and speakers.",
     "cta.heading": "Let's work together?",
     "cta.body": "I'm open to Cloud/DevOps Engineer Jr opportunities. Get in touch.",
     "cta.email": "Send email",

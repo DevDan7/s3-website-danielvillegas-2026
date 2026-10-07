@@ -32,7 +32,7 @@ resource "aws_s3_bucket_policy" "portfolio" {
         Effect    = "Allow"
         Principal = "*"
         Action    = "s3:GetObject"
-        Resource  = "arn:aws:s3:::proyecto-s3-website-danelvillegas-2026/*"
+        Resource  = "${aws_s3_bucket.portfolio.arn}/*"
       }
     ]
   })
