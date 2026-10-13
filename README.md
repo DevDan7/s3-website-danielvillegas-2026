@@ -33,7 +33,8 @@ flowchart LR
 ├── index.html        # Sitio (HTML + CSS + i18n PT/ES/EN, sin build)
 ├── error.html        # Página 404 personalizada
 ├── img/              # Foto, certificaciones, CV y fotos de comunidad (img/comunidad/*.webp)
-├── provider.tf       # Provider AWS (~> 5.0), Terraform >= 1.5
+├── bootstrap/        # Stack aparte (state local): bucket del state remoto
+├── provider.tf       # Provider AWS (~> 5.0), Terraform >= 1.10, backend S3
 ├── variables.tf      # bucket_name, aws_region, index_document
 ├── main.tf           # Bucket, website config, public access block, bucket policy
 ├── outputs.tf        # website_url, bucket_arn, bucket_name
@@ -43,6 +44,9 @@ flowchart LR
 ## 🚀 Uso
 
 ```bash
+# 0. Backend remoto (una sola vez)
+cd bootstrap && terraform init && terraform apply && cd ..
+
 # 1. Infraestructura
 terraform init
 terraform plan
@@ -58,6 +62,10 @@ DRY_RUN=1 ./deploy.sh     # muestra qué subiría, sin tocar el bucket
 
 Para agregar fotos de eventos: exportar a `.webp` (≈1200px de ancho) en `img/comunidad/` con el nombre que referencia `index.html` (`aws-ug-floripa.webp`, `escola-da-nuvem.webp`, `community-day-sul-2026.webp`). Si la foto no existe, la tarjeta muestra un placeholder.
 
+### State remoto
+
+El state del stack principal vive en `s3://danielvillegas-tfstate-2026/s3-website/terraform.tfstate`, con lock nativo de S3 (`use_lockfile = true`, sin DynamoDB). El bucket se crea desde `bootstrap/`, que usa state local porque no puede guardarse en el bucket que él mismo crea. Tiene versionado, cifrado SSE-S3, acceso público bloqueado, política que exige TLS y `prevent_destroy`.
+
 ## 🔍 Troubleshooting y aprendizajes
 
 - **403 Access Denied:** S3 es privado por defecto. Hizo falta desactivar Block Public Access *y* agregar una bucket policy con `s3:GetObject`; con solo uno de los dos el sitio no carga.
@@ -65,13 +73,15 @@ Para agregar fotos de eventos: exportar a `.webp` (≈1200px de ancho) en `img/c
 - **Imágenes dentro de un .zip:** el navegador no descomprime archivos; los assets tienen que subirse sueltos con la misma ruta que referencia el HTML.
 - **Case sensitivity:** las keys de S3 distinguen mayúsculas, minúsculas y extensión (`.jpg` ≠ `.png`).
 - **Del console a IaC:** el bucket se creó primero a mano y luego se migró a Terraform; el ARN hardcodeado en la policy se reemplazó por `aws_s3_bucket.portfolio.arn`.
+- **AccessDenied con "explicit deny" al crear el bucket de state:** el usuario IAM tiene una política que niega todo sin MFA, y el perfil usado solo tenía claves fijas. Se resuelve con `aws sts get-session-token --serial-number <arn-mfa> --token-code <código>` y usando las credenciales temporales (con `aws_session_token`).
+- **Migración local → S3:** `bootstrap/` crea el bucket con state local; después `terraform init -migrate-state` copia el state y `terraform plan` debe dar "No changes" antes de borrar el archivo local.
 - **Deploy seguro:** un `aws s3 sync .` sin filtros publicaría el tfstate (que puede contener datos sensibles). Por eso el deploy usa una allowlist.
 
 ## 🗺️ Próximos pasos
 
 - [ ] CloudFront + ACM (HTTPS) con Origin Access Control y bucket privado
 - [ ] Deploy automático con GitHub Actions vía OIDC
-- [ ] Backend remoto de Terraform (S3 + lockfile)
+- [x] Backend remoto de Terraform (S3 + lockfile)
 
 ## 👨‍💻 Autor
 
