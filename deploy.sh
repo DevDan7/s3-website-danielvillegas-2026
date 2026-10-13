@@ -46,4 +46,16 @@ aws s3 cp index.html "${DEST}index.html" --region "$REGION" $DRY \
 aws s3 cp error.html "${DEST}error.html" --region "$REGION" $DRY \
   --content-type "text/html; charset=utf-8" --cache-control "no-cache"
 
-echo "URL: http://${BUCKET}.s3-website-${REGION}.amazonaws.com/${PREFIX}"
+# Invalida la caché de CloudFront para que los cambios se vean al instante
+DIST_ID="${DIST_ID:-$(terraform output -raw cloudfront_distribution_id 2>/dev/null || true)}"
+if [[ -n "$DIST_ID" && -z "${DRY_RUN:-}" ]]; then
+  echo "Invalidación CloudFront: $(aws cloudfront create-invalidation --distribution-id "$DIST_ID" --paths "/*" \
+    --query 'Invalidation.Id' --output text)"
+fi
+
+CF_DOMAIN="$(terraform output -raw cloudfront_domain 2>/dev/null || true)"
+if [[ -n "$CF_DOMAIN" ]]; then
+  echo "URL: https://${CF_DOMAIN}/${PREFIX}${PREFIX:+index.html}"
+else
+  echo "URL: http://${BUCKET}.s3-website-${REGION}.amazonaws.com/${PREFIX}"
+fi

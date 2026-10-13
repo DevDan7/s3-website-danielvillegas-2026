@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daniel Villegas | Cloud Engineer</title>
-<meta name="description" content="Daniel Villegas — Cloud Engineer certificado AWS (4x). Projetos serverless com Terraform e IA generativa (Bedrock), mentor na Escola da Nuvem e AWS User Group Florianópolis.">
+<meta name="description" content="Daniel Villegas — Cloud Engineer certificado AWS (4x). Projetos serverless com Terraform e IA generativa (Bedrock), mentor na Escola da Nuvem e Leader do AWS User Group Florianópolis.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Daniel Villegas | Cloud Engineer">
 <meta property="og:description" content="AWS 4x certificado · Terraform · IA generativa serverless · Comunidade AWS">
@@ -248,10 +248,10 @@
 
       <div class="project-card">
         <div class="top-row"><span class="project-num">02</span><span class="project-badge" data-i18n="badge.solo">individual</span></div>
-        <h3 data-i18n="p1.title">Hospedagem de site estático serverless</h3>
-        <p data-i18n="p1.desc">Este site (o que você está vendo agora) roda sobre Amazon S3 com Static Website Hosting, provisionado via Terraform. Base de IAM e controle de acesso que depois reutilizei em projetos com IA generativa.</p>
-        <div class="arch-flow" aria-label="Arquitetura"><span class="arch-label">flow</span><b>Terraform</b><i>→</i><b>S3 Website</b><i>+</i><b>Bucket Policy</b><i>→</i><b>deploy.sh</b></div>
-        <div class="project-tags"><span>#AWS</span><span>#Terraform</span><span>#S3</span></div>
+        <h3 data-i18n="p1.title">Site estático seguro: S3 privado + CloudFront</h3>
+        <p data-i18n="p1.desc">Este site (o que você está vendo agora) é servido pelo CloudFront com HTTPS a partir de um bucket S3 privado, acessível apenas via Origin Access Control. 100% Terraform, com state remoto em S3 e lock nativo, e deploy seguro com allowlist e invalidação de cache.</p>
+        <div class="arch-flow" aria-label="Arquitetura"><span class="arch-label">flow</span><b>HTTPS</b><i>→</i><b>CloudFront</b><i>→</i><b>OAC</b><i>→</i><b>S3 privado</b></div>
+        <div class="project-tags"><span>#AWS</span><span>#Terraform</span><span>#S3</span><span>#CloudFront</span></div>
         <a class="project-link" href="https://github.com/DevDan7/s3-website-danielvillegas-2026" target="_blank" rel="noopener">
           <span data-i18n="link.repo">Ver repositório</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
@@ -367,8 +367,8 @@ const i18n = {
     "badge.live": "em produção",
     "p0.title": "AI Mentoring — plataforma de mentoria AWS com IA generativa",
     "p0.desc": "Plataforma serverless usada por turmas reais de mentoria para a certificação AWS Cloud Practitioner. Fotos de provas enviadas ao S3 passam por SQS + DLQ até uma Lambda que usa Claude no Amazon Bedrock para OCR e estruturação em JSON, alimentando um banco de questões no DynamoDB. Os alunos fazem diagnóstico, prática por tema e exame final de 65 questões via API Gateway com autenticação Cognito (JWT) e frontend no Amplify. Infraestrutura 100% Terraform com CI/CD no GitHub Actions via OIDC.",
-    "p1.title": "Hospedagem de site estático serverless",
-    "p1.desc": "Este site (o que você está vendo agora) roda sobre Amazon S3 com Static Website Hosting, provisionado via Terraform. Base de IAM e controle de acesso que depois reutilizei em projetos com IA generativa.",
+    "p1.title": "Site estático seguro: S3 privado + CloudFront",
+    "p1.desc": "Este site (o que você está vendo agora) é servido pelo CloudFront com HTTPS a partir de um bucket S3 privado, acessível apenas via Origin Access Control. 100% Terraform, com state remoto em S3 e lock nativo, e deploy seguro com allowlist e invalidação de cache.",
     "p2.title": "Reconhecimento facial serverless com IA",
     "p2.desc": "Arquitetura orientada a eventos: upload de imagem no S3 aciona uma Lambda que usa Amazon Rekognition, salva resultados no DynamoDB e envia alertas via SNS.",
     "p3.title": "Pipeline de audiolivros com IA (dual-engine)",
@@ -380,9 +380,9 @@ const i18n = {
     "nav.contact": "Contato",
     "community.eyebrow": "comunidade",
     "community.heading": "Comunidade AWS",
-    "c1.role": "Organização · voluntariado",
+    "c1.role": "Leader",
     "c1.title": "AWS User Group Florianópolis",
-    "c1.desc": "Ajudo a organizar os encontros do grupo de usuários AWS de Florianópolis (2 encontros até agora), conectando quem está começando na nuvem com profissionais da área.",
+    "c1.desc": "Organizo os encontros do grupo de usuários AWS de Florianópolis: no mínimo 6 por ano, além de workshops práticos, com 30 a 50 participantes por evento, conectando quem está começando na nuvem com profissionais da área.",
     "c2.role": "Mentor voluntário",
     "c2.title": "Escola da Nuvem",
     "c2.desc": "Mentoria de turmas que se preparam para a certificação AWS Cloud Practitioner. A plataforma AI Mentoring nasceu para apoiar essas sessões e é usada pelos alunos.",
@@ -416,8 +416,8 @@ const i18n = {
     "badge.live": "en producción",
     "p0.title": "AI Mentoring — plataforma de mentoría AWS con IA generativa",
     "p0.desc": "Plataforma serverless usada por cohortes reales de mentoría para la certificación AWS Cloud Practitioner. Las fotos de exámenes subidas a S3 pasan por SQS + DLQ hasta una Lambda que usa Claude en Amazon Bedrock para OCR y estructuración en JSON, alimentando un banco de preguntas en DynamoDB. Los alumnos hacen un diagnóstico, práctica por tema y un examen final de 65 preguntas vía API Gateway con autenticación Cognito (JWT) y frontend en Amplify. Infraestructura 100% Terraform con CI/CD en GitHub Actions vía OIDC.",
-    "p1.title": "Hospedaje de sitio web estático serverless",
-    "p1.desc": "Este sitio (el que estás viendo ahora) corre sobre Amazon S3 con Static Website Hosting, provisionado vía Terraform. Base de IAM y control de acceso que luego reutilicé en proyectos con IA generativa.",
+    "p1.title": "Sitio estático seguro: S3 privado + CloudFront",
+    "p1.desc": "Este sitio (el que estás viendo ahora) se sirve por CloudFront con HTTPS desde un bucket S3 privado, accesible solo vía Origin Access Control. 100% Terraform, con state remoto en S3 y lock nativo, y deploy seguro con allowlist e invalidación de caché.",
     "p2.title": "Reconocimiento facial serverless con IA",
     "p2.desc": "Arquitectura orientada a eventos: subir una imagen a S3 dispara una Lambda que usa Amazon Rekognition, guarda resultados en DynamoDB y envía alertas vía SNS.",
     "p3.title": "Pipeline de audiolibros con IA (dual-engine)",
@@ -429,9 +429,9 @@ const i18n = {
     "nav.contact": "Contacto",
     "community.eyebrow": "comunidad",
     "community.heading": "Comunidad AWS",
-    "c1.role": "Organización · voluntariado",
+    "c1.role": "Leader",
     "c1.title": "AWS User Group Florianópolis",
-    "c1.desc": "Ayudo a organizar los encuentros del grupo de usuarios AWS de Florianópolis (2 encuentros hasta ahora), conectando a quienes empiezan en la nube con profesionales del área.",
+    "c1.desc": "Organizo los encuentros del grupo de usuarios AWS de Florianópolis: al menos 6 por año, además de workshops prácticos, con 30 a 50 participantes por evento, conectando a quienes empiezan en la nube con profesionales del área.",
     "c2.role": "Mentor voluntario",
     "c2.title": "Escola da Nuvem",
     "c2.desc": "Mentoría de cohortes que se preparan para la certificación AWS Cloud Practitioner. La plataforma AI Mentoring nació para apoyar esas sesiones y la usan los alumnos.",
@@ -465,8 +465,8 @@ const i18n = {
     "badge.live": "in production",
     "p0.title": "AI Mentoring — AWS mentoring platform powered by generative AI",
     "p0.desc": "Serverless platform used by real mentoring cohorts preparing for the AWS Cloud Practitioner certification. Exam photos uploaded to S3 flow through SQS + DLQ into a Lambda that uses Claude on Amazon Bedrock for OCR and JSON structuring, feeding a DynamoDB question bank. Students take a diagnostic, topic practice and a 65-question final exam through API Gateway with Cognito (JWT) auth and an Amplify frontend. Infrastructure 100% in Terraform with CI/CD on GitHub Actions via OIDC.",
-    "p1.title": "Serverless static website hosting",
-    "p1.desc": "This site (the one you're looking at) runs on Amazon S3 with Static Website Hosting, provisioned via Terraform. The IAM and access-control foundation I later reused in generative AI projects.",
+    "p1.title": "Secure static site: private S3 + CloudFront",
+    "p1.desc": "This site (the one you're looking at) is served by CloudFront over HTTPS from a private S3 bucket, reachable only through Origin Access Control. 100% Terraform, with remote state in S3 and native locking, plus a safe deploy with an allowlist and cache invalidation.",
     "p2.title": "Serverless facial recognition with AI",
     "p2.desc": "Event-driven architecture: an image upload to S3 triggers a Lambda that uses Amazon Rekognition, stores results in DynamoDB, and sends alerts via SNS.",
     "p3.title": "AI audiobook pipeline (dual-engine)",
@@ -478,9 +478,9 @@ const i18n = {
     "nav.contact": "Contact",
     "community.eyebrow": "community",
     "community.heading": "AWS Community",
-    "c1.role": "Organizing · volunteering",
+    "c1.role": "Leader",
     "c1.title": "AWS User Group Florianópolis",
-    "c1.desc": "I help organize the Florianópolis AWS User Group meetups (2 so far), connecting people starting out in cloud with industry professionals.",
+    "c1.desc": "I organize the Florianópolis AWS User Group meetups: at least 6 per year plus hands-on workshops, with 30 to 50 attendees per event, connecting people starting out in cloud with industry professionals.",
     "c2.role": "Volunteer mentor",
     "c2.title": "Escola da Nuvem",
     "c2.desc": "Mentoring cohorts preparing for the AWS Cloud Practitioner certification. The AI Mentoring platform was built to support these sessions and is used by the students.",

@@ -15,3 +15,14 @@ variable "index_document" {
   type        = string
   default     = "index.html"
 }
+variable "domain_name" {
+  description = "Dominio propio (ej. danielvillegas.dev). Vacío = usar el dominio *.cloudfront.net sin ACM"
+  type        = string
+  default     = ""
+}
+
+variable "price_class" {
+  description = "Edge locations de CloudFront. PriceClass_All incluye São Paulo; PriceClass_100 solo EE.UU./Europa"
+  type        = string
+  default     = "PriceClass_All"
+}
